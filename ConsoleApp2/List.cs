@@ -51,16 +51,40 @@ namespace ConsoleApp2
             }
             Console.WriteLine();
         }
+        public bool RemoveAt(int index)
+        {
+            if(index > Count-1 || index < 0)
+            {
+                return false;
+            }
+            T[] tmp = new T[_count - 1];
+            for(int i = 0; i < index; i++)
+            {
+                tmp[i] = _list[i];
+            }
+            for(int i = index; i < _count; i++)
+            {
+                tmp[i] = _list[i+1];
+            }
+            _list = tmp;
+            return true;
+        }
         public bool Remove(T item)
         {
+            T[] tmp = new T[_count-1];
             if(!Contains(item))
             {
                 return false;
             }
             for(int i = 0; i < _count; i++)
             {
-                
+                if (!item.Equals(_list[i]))
+                {
+                    tmp[i] = _list[i];
+                }
             }
+            _list = tmp;
+            _count--;
             return true;
         }
         public bool Contains(T? item)
@@ -72,11 +96,22 @@ namespace ConsoleApp2
             for(int i = 0; i < _count; i++)
             {
                 if (item.Equals(_list[i]))
-                {
+                { 
                     return true;
                 }
             }
             return false;
+        }
+        public int IndexOf(T item)
+        {
+            for(int i = 0; i < _count;i++)
+            {
+                if (item.Equals(_list[i]))
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
         public int Count => _count;
     }
