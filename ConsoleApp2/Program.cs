@@ -17,9 +17,9 @@ class Program
         //Console.WriteLine(list.Contains(5));
         Console.WriteLine(list.IndexOf(2));
         Console.WriteLine(list.IndexOf(8));
-        list.RemoveAt(1);
-        Console.WriteLine("-------------------------");
-        list.Show();
+        //list.RemoveAt(2);
+        //Console.WriteLine("-------------------------");
+        //list.Show();
     }
 }
 

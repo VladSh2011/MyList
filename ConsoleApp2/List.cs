@@ -62,11 +62,12 @@ namespace ConsoleApp2
             {
                 tmp[i] = _list[i];
             }
-            for(int i = index; i < _count; i++)
+            for(int i = index; i < _count-1; i++)
             {
                 tmp[i] = _list[i+1];
             }
             _list = tmp;
+            _count--;
             return true;
         }
         public bool Remove(T item)
