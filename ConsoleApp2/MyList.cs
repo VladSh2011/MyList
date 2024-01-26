@@ -43,6 +43,7 @@ namespace ConsoleApp2
                 _list = tmp;
             }
         }
+        //Прибрати після реалізації IEnumerable
         public void Show()
         {
             foreach (T item in _list)
@@ -53,18 +54,18 @@ namespace ConsoleApp2
         }
         public bool RemoveAt(int index)
         {
-            if(index > Count-1 || index < 0)
+            if (index > Count - 1 || index < 0)
             {
                 return false;
             }
             T[] tmp = new T[_count - 1];
-            for(int i = 0; i < index; i++)
+            for (int i = 0; i < index; i++)
             {
                 tmp[i] = _list[i];
             }
-            for(int i = index; i < _count-1; i++)
+            for (int i = index; i < _count - 1; i++)
             {
-                tmp[i] = _list[i+1];
+                tmp[i] = _list[i + 1];
             }
             _list = tmp;
             _count--;
@@ -72,21 +73,8 @@ namespace ConsoleApp2
         }
         public bool Remove(T item)
         {
-            T[] tmp = new T[_count-1];
-            if(!Contains(item))
-            {
-                return false;
-            }
-            for(int i = 0; i < _count; i++)
-            {
-                if (!item.Equals(_list[i]))
-                {
-                    tmp[i] = _list[i];
-                }
-            }
-            _list = tmp;
-            _count--;
-            return true;
+            int index = IndexOf(item);
+            return RemoveAt(index);
         }
         public bool Contains(T? item)
         {
@@ -94,10 +82,10 @@ namespace ConsoleApp2
             {
                 return false;
             }
-            for(int i = 0; i < _count; i++)
+            for (int i = 0; i < _count; i++)
             {
                 if (item.Equals(_list[i]))
-                { 
+                {
                     return true;
                 }
             }
@@ -105,7 +93,7 @@ namespace ConsoleApp2
         }
         public int IndexOf(T item)
         {
-            for(int i = 0; i < _count;i++)
+            for (int i = 0; i < _count; i++)
             {
                 if (item.Equals(_list[i]))
                 {
@@ -114,6 +102,47 @@ namespace ConsoleApp2
             }
             return -1;
         }
+        public void Reverse()
+        {
+            T[] tmp = new T[_count];
+            for (int i = Count - 1; i >= 0; i--)
+            {
+                tmp[Count - 1 - i] = _list[i];
+            }
+            _list = tmp;
+        }
+        public int LastIndexOf(T item)
+        {
+            for (int i = _count-1; i >= 0; i--)
+            {
+                if (_list[i].Equals(item))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        public void Insert(int index, T value)
+        {
+            if (index < 0 || index > 0 || value == null)
+            {
+                return;
+            }
+            T[] tmp = new T[_count + 1];
+            for(int i = 0; i < index; i++)
+            {
+                tmp[i] = _list[i];
+            }
+            tmp[index] = value;
+            for(int i = index;  i < _count; i++)
+            {
+                tmp[i+1] = _list[i];
+            }
+            _list = tmp;
+            _count++;
+        }
+        //Добавити IEnumerable в клас
+        //Попробувати написати метод InsertRange, який отримує першим параметром індекс, а другим колекцію
         public int Count => _count;
     }
 }
