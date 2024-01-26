@@ -11,6 +11,13 @@ namespace ConsoleApp2
     {
         private T[] _list;
         private int _count;
+
+        public T this[int index]
+        {
+            get => _list[index];
+            set => _list[index] = value;
+        }
+
         public MyList()
         {
             _list = new T[0];
